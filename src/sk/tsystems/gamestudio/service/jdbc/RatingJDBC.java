@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import sk.tsystems.gamestudio.entity.Rating;
 import sk.tsystems.gamestudio.service.RatingService;
@@ -12,7 +11,7 @@ import sk.tsystems.gamestudio.service.RatingService;
 public class RatingJDBC implements RatingService {
 	public static final String ADD_RATING = "INSERT INTO rating (rating, id_game, id_player) VALUES (?, ?, ?)";
 	public static final String GET_RATING_COUNT = "SELECT COUNT(*) FROM rating WHERE id_game = ?";
-	public static final String GET_AVERAGE_RATING = "SELECT AVG(*) FROM rating where id_game = ?";
+	public static final String GET_AVERAGE_RATING = "SELECT AVG(rating) FROM rating where id_game = ?";
 
 	NameToId id = new NameToId();
 	
@@ -46,9 +45,19 @@ public class RatingJDBC implements RatingService {
 	}
 
 	@Override
-	public List<Rating> findAverageRatingForGame(String gameName) {
-		// TODO Auto-generated method stub
-		return null;
+	public double findAverageRatingForGame(String gameName) {
+		try (Connection c = new DBConnection().connectToDB();
+				PreparedStatement stmt = c.prepareStatement(GET_AVERAGE_RATING)) {
+				stmt.setInt(1, id.getGameId(gameName));
+				try (ResultSet rs = stmt.executeQuery()) {
+				if(rs.next()) {
+					return rs.getDouble(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	
 }

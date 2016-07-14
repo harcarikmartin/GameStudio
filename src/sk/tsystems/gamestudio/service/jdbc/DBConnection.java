@@ -13,7 +13,7 @@ public class DBConnection {
 		Connection c = null;
 		try {
 			c = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("DB connected");
+//			System.out.println("DB connected");
 			return c;
 		} catch (SQLException e) {
 			System.err.println("SQL Exception: " + e.getMessage());
