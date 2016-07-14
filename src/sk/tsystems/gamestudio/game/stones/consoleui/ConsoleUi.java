@@ -3,14 +3,17 @@ package sk.tsystems.gamestudio.game.stones.consoleui;
 import java.util.Scanner;
 
 import sk.tsystems.gamestudio.game.stones.core.Field;
+import sk.tsystems.gamestudio.menu.Game;
+import sk.tsystems.gamestudio.menu.consoleui.MenuConsoleUI;
 
 
-public class ConsoleUI {
+public class ConsoleUi {
+	
 	private Field field;
 
 	private Scanner scanner;
 
-	public ConsoleUI() {
+	public ConsoleUi() {
 		field = Field.load();
 		if (field == null) {
 			newField();
@@ -72,7 +75,9 @@ public class ConsoleUI {
 		case "x":
 		case "exit":
 			field.save();
-			System.exit(0);
+			System.out.println();
+			Game game = new MenuConsoleUI();
+			game.run();
 		case "n":
 		case "new":
 			newField();

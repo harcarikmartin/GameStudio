@@ -6,5 +6,5 @@ import sk.tsystems.gamestudio.entity.Score;
 public interface ScoreService {
 	void add(Score score);
 	
-	List<Score> findCommentForGame(String game);
+	List<Score> findTenBestScoresForGame(String game);
 }

@@ -2,47 +2,33 @@ package sk.tsystems.gamestudio.game.minesweeper;
 
 import sk.tsystems.gamestudio.game.minesweeper.consoleui.ConsoleUI;
 import sk.tsystems.gamestudio.game.minesweeper.core.Field;
+import sk.tsystems.gamestudio.menu.Game;
 
 /**
  * Main application class.
  */
-public class Minesweeper {
+public class Minesweeper implements Game {
 	private long startMillis = System.currentTimeMillis();
 	private BestTimes bestTimes = new BestTimes();
 	private static Minesweeper instance;
 	private Settings setting;
-	
-	/**
-	 * Constructor.
-	 */
-	private Minesweeper() {
-		instance = this;
-		userInterface = new ConsoleUI();
-		setSetting(Settings.BEGINNER);
-		setting = getSetting();
-
-		Field field = new Field(setting.getRowCount(), setting.getColumnCount(), setting.getMineCount());
-		userInterface.newGameStarted(field);
-	}
-	
 	/** User interface. */
 	private UserInterface userInterface;
 	
 	/**
-	 * Main method.
-	 * 
-	 * @param args
-	 *            arguments
+	 * Constructor.
 	 */
+	public Minesweeper() {
+		instance = this;
+		userInterface = new ConsoleUI();
+		setSetting(Settings.BEGINNER);
+		setting = getSetting();
+	}
 	
 	public long getPlayingSeconds() {
 		return (System.currentTimeMillis() - startMillis) / 1000;
 	}
 	
-	public static void main(String[] args) {
-		new Minesweeper();
-	}
-
 	public BestTimes getBestTimes() {
 		return bestTimes;
 	}
@@ -58,5 +44,12 @@ public class Minesweeper {
 	public void setSetting(Settings setting) {
 		this.setting = setting;
 		this.setting.save();
+	}
+
+	@Override
+	public void run() {
+		Field field = new Field(setting.getRowCount(), setting.getColumnCount(), setting.getMineCount());
+		userInterface.newGameStarted(field);
+		
 	}
 }

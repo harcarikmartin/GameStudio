@@ -13,6 +13,8 @@ import sk.tsystems.gamestudio.game.minesweeper.core.Field;
 import sk.tsystems.gamestudio.game.minesweeper.core.GameState;
 import sk.tsystems.gamestudio.game.minesweeper.core.Mine;
 import sk.tsystems.gamestudio.game.minesweeper.core.Tile.State;
+import sk.tsystems.gamestudio.menu.Game;
+import sk.tsystems.gamestudio.menu.consoleui.MenuConsoleUI;
 
 /**
  * Console user interface.
@@ -124,14 +126,13 @@ public class ConsoleUI implements UserInterface {
 			String rowString = matcher.group(4);
 			String columnString = matcher.group(5);
 
-//			for (int i = 0; i <= matcher.groupCount(); i++) {
-//				System.out.println(matcher.group(i));
-//			}
 			if (exit == null) {
 				exit = "";
 			}
 			if (exit.toLowerCase().equals("x")) {
-				System.exit(0);
+				System.out.println();
+				Game game = new MenuConsoleUI();
+				game.run();
 
 			} else if (commandTyp.toLowerCase().equals("o") || commandTyp.toLowerCase().equals("m")) {
 				char rowChar = rowString.charAt(0);

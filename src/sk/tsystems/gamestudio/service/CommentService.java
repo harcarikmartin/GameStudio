@@ -6,5 +6,7 @@ import sk.tsystems.gamestudio.entity.Comment;
 public interface CommentService {
 	void add(Comment comment);
 	
-	List<Comment> findCommentForGame(String game);
+	List<Comment> findCommentsForGame(String game);
+	
+	List<Comment> findCommentForGame(String game, String user);
 }
