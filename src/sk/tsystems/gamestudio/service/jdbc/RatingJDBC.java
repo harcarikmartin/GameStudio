@@ -13,22 +13,13 @@ public class RatingJDBC implements RatingService {
 	public static final String ADD_RATING = "INSERT INTO rating (rating, id_game, id_player) VALUES (?, ?, ?)";
 	public static final String GET_RATING_COUNT = "SELECT COUNT(*) FROM rating WHERE id_game = ?";
 	public static final String GET_AVERAGE_RATING = "SELECT AVG(*) FROM rating where id_game = ?";
-	
-	Connection c = new DBConnection().connectToDB();
+
 	NameToId id = new NameToId();
-	
-//	public static void main(String[] args) {
-//		
-//		if(conn != null) {
-//			System.out.println("success");
-//		} else {
-//			System.out.println("fail");
-//		}
-//	}
 	
 	@Override
 	public void add(Rating rating) {
-		try (PreparedStatement stmt = c.prepareStatement(ADD_RATING)) {
+		try (Connection c = new DBConnection().connectToDB();
+				PreparedStatement stmt = c.prepareStatement(ADD_RATING)) {
 				stmt.setString(1, rating.getRating());
 				stmt.setInt(2, id.getGameId(rating.getGameName()));
 				stmt.setInt(3, id.getPlayerId(rating.getPlayerName()));
@@ -40,9 +31,10 @@ public class RatingJDBC implements RatingService {
 
 	@Override
 	public int ratingsCountForGame(String gameName) {
-		try (PreparedStatement stmt = c.prepareStatement(GET_RATING_COUNT)) {
-			stmt.setInt(1, id.getGameId(gameName));
-			try (ResultSet rs = stmt.executeQuery()) {
+		try (Connection c = new DBConnection().connectToDB();
+				PreparedStatement stmt = c.prepareStatement(GET_RATING_COUNT)) {
+				stmt.setInt(1, id.getGameId(gameName));
+				try (ResultSet rs = stmt.executeQuery()) {
 				if(rs.next()) {
 					return rs.getInt(1);
 				}

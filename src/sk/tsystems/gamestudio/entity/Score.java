@@ -10,6 +10,10 @@ public class Score {
 		this.setPlayerName(playerName);
 		this.setGameName(gameName);
 	}
+	
+	public Score(int score, String playerName) {
+		
+	}
 
 	public int getScore() {
 		return score;
