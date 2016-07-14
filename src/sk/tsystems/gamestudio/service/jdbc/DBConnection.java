@@ -1,14 +1,16 @@
-package sk.tsystems.gamestudio.service;
+package sk.tsystems.gamestudio.service.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DBUtility {
+public class DBConnection {
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521/XE";
 	private static final String USER = "GameCenter";
 	private static final String PASSWORD = "Gamecenter";
-	
+
 	public Connection connectToDB() {
 		Connection c = null;
 		try {
@@ -22,8 +24,4 @@ public class DBUtility {
 		System.out.println("DB connection failed.");
 		return c;
 	}
-	
-//	public static final String ADD_RATING = "INSERT INTO register (id, name, phone_number) VALUES (ids.nextval, ?, ?)";
-//	public static final String GET_RATING_COUNT = "SELECT COUNT(*) FROM rating WHERE ID_GAME IS ?";
-//	public static final String GET_AVERAGE_RATING = "SELECT COUNT(*) FROM register";
 }
