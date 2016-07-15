@@ -23,7 +23,7 @@ public class ConsoleUi {
 
 	public void run() {
 		System.out.println("Best scores: ");
-		new ScoreListing("stones");
+		ScoreListing sc = new ScoreListing("stones");
 		do {
 			if(!close) {
 				show();
@@ -34,6 +34,8 @@ public class ConsoleUi {
 		} while (!field.isSolved());
 		if(!close) {
 			new GameFinishedService().addRatingAndComments("stones");
+			System.out.println("Best scores: ");
+			System.out.println(sc);
 		}
 	}
 	

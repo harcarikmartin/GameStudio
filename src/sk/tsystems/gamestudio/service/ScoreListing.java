@@ -9,8 +9,8 @@ public class ScoreListing {
 	
 	public ScoreListing(String gameName) {
 		List<Score> scores = new ScoreJDBC().findTenBestScoresForGame(gameName);
-		for(Score score : scores) {
-			System.out.println(score.getPlayerName() + ", " + score.getScore());
+		for(int i = 0; i < scores.size(); i++) {
+			System.out.println(scores.get(i).getPlayerName() + ", " + scores.get(i).getScore());
 		}
 	}
 }

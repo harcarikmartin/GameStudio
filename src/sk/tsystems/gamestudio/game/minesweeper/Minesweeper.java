@@ -25,8 +25,6 @@ public class Minesweeper implements Game {
 		userInterface = new ConsoleUI();
 		setSetting(Settings.BEGINNER);
 		setting = getSetting();
-		System.out.println("Best scores: ");
-		new ScoreListing("minesweeper");
 	}
 	
 	public long getPlayingSeconds() {

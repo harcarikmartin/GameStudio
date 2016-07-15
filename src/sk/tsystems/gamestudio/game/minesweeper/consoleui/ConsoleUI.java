@@ -14,6 +14,7 @@ import sk.tsystems.gamestudio.game.minesweeper.core.GameState;
 import sk.tsystems.gamestudio.game.minesweeper.core.Mine;
 import sk.tsystems.gamestudio.game.minesweeper.core.Tile.State;
 import sk.tsystems.gamestudio.service.GameFinishedService;
+import sk.tsystems.gamestudio.service.ScoreListing;
 
 /**
  * Console user interface.
@@ -37,12 +38,15 @@ public class ConsoleUI implements UserInterface {
 	@Override
 	public void newGameStarted(Field field) {
 		this.field = field;
-
+		System.out.println("Best scores: ");
+		ScoreListing sc = new ScoreListing("minesweeper");
 		do {
 			update();
 			if (field.getState().equals(GameState.SOLVED)) {
 				System.out.println("You WON");
 				new GameFinishedService().addRatingAndComments("minesweeper");
+				System.out.println("Best scores: ");
+				System.out.println(sc);
 			}
 			if (field.getState().equals(GameState.FAILED)) {
 				System.out.println("You LOST");
