@@ -37,6 +37,7 @@ public class ScoreJDBC implements ScoreService{
 		try (Connection c = new DBConnection().connectToDB();
 				Statement stmt = c.createStatement()) {
 				ResultSet rs = stmt.executeQuery(GET_BEST_SCORES);
+				
 				while(rs.next()) {
 					scores.add(new Score(rs.getInt(1), rs.getString(2), rs.getString(3)));
 				}
