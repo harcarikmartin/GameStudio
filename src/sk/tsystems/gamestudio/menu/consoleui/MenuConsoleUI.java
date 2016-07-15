@@ -13,15 +13,13 @@ import sk.tsystems.gamestudio.service.jdbc.RatingJDBC;
 public class MenuConsoleUI implements Game {
 	private BufferedReader input = new BufferedReader(new InputStreamReader(
 			System.in));
-	private enum Option {
-		MINESWEEPER, STONES, GUESS_THE_NUMBER, EXIT
+	public enum Option {
+		MINESWEEPER, STONES, GTN, EXIT
 	}
-	RatingJDBC ratings = new RatingJDBC();
-	
 	
 	public void run() {
 		boolean run = true;
-		System.out.println("Welcome to GameCenter, choose the Game you want to play.");
+		System.out.println(System.getProperty("user.name") + ", welcome to GameCenter, choose the Game you want to play.");
 		while (run == true) {
 			Game game = null;
 			switch (showMenu()) {
@@ -31,13 +29,13 @@ public class MenuConsoleUI implements Game {
 			case STONES:
 				game = new Stones();
 				break;
-			case GUESS_THE_NUMBER:
+			case GTN:
 				game = new Gtn();
 				break;
 			case EXIT:
 				System.out.println("Thanks for visiting Game Studio.");
-				System.out.println("Game Studio closed.");
 				run = false;
+				System.out.println("Game Studio closed.");
 			}
 			if(run == true) {
 				game.run();
@@ -60,7 +58,10 @@ public class MenuConsoleUI implements Game {
 			if(option == Option.EXIT) {
 				System.out.printf("%2d. %-20s%n", option.ordinal() + 1, option);
 			} else {
-				System.out.printf("%2d. %-20s %-15d %-15f%n", option.ordinal() + 1, option, ratings.ratingsCountForGame(option.toString()), ratings.findAverageRatingForGame(option.toString()));
+//				System.out.println("Game: " + option.toString().toLowerCase());
+				System.out.printf("%2d. %-20s %-15d %-15f%n", option.ordinal() + 1, option, 
+						new RatingJDBC().findRatingsCountForGame(option.toString().toLowerCase()), 
+						new RatingJDBC().findAverageRatingForGame(option.toString().toLowerCase()));
 			}
 		}
 		System.out.println("---------------------------------------------------");

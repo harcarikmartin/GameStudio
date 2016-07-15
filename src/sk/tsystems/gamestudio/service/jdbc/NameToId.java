@@ -15,6 +15,7 @@ public class NameToId {
 				stmt.setString(1, parameter);
 				try (ResultSet rs = stmt.executeQuery()) {
 				if(rs.next()) {
+//					System.out.println("Id is" + rs.getInt(1));
 					return rs.getInt(1);
 				}
 			}

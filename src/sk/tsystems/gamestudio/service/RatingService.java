@@ -5,7 +5,7 @@ import sk.tsystems.gamestudio.entity.Rating;
 public interface RatingService {
 	void add(Rating rating);
 	
-	int ratingsCountForGame(String gameName);
+	int findRatingsCountForGame(String gameName);
 	
 	double findAverageRatingForGame(String gameName);
 }

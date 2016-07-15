@@ -4,8 +4,18 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GuessTheNumber {
+	private static final int INTERVAL = 1000;
 	Random rn = new Random();
-	int numberToGuess = rn.nextInt(1000);
+	int numberToGuess = rn.nextInt(INTERVAL);
+	
+	public int getNumberToGuess() {
+		return numberToGuess;
+	}
+	
+	public int getNumberOfTries() {
+		return numberOfTries;
+	}
+
 	int numberOfTries = 0;
 	Scanner input = new Scanner(System.in);
 	int guess;
@@ -13,7 +23,7 @@ public class GuessTheNumber {
 	
 	public GuessTheNumber() {
 		while (match == false) {
-			System.out.println("Guess the number between 1 and 1000: ");
+			System.out.println("Guess the number between 1 and " + INTERVAL + ": ");
 			guess = input.nextInt();
 			numberOfTries++;
 			if(guess == numberToGuess) {

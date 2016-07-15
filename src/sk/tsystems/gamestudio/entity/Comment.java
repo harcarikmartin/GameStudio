@@ -10,6 +10,10 @@ public class Comment {
 		this.setPlayerName(playerName);
 		this.setGameName(gameName);
 	}
+	
+	public Comment(String comment) {
+		this(comment, null, null);
+	}
 
 	public String getComment() {
 		return comment;

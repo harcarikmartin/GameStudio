@@ -13,15 +13,15 @@ import sk.tsystems.gamestudio.game.minesweeper.core.Field;
 import sk.tsystems.gamestudio.game.minesweeper.core.GameState;
 import sk.tsystems.gamestudio.game.minesweeper.core.Mine;
 import sk.tsystems.gamestudio.game.minesweeper.core.Tile.State;
-import sk.tsystems.gamestudio.menu.Game;
-import sk.tsystems.gamestudio.menu.consoleui.MenuConsoleUI;
+import sk.tsystems.gamestudio.service.GameFinishedService;
 
 /**
  * Console user interface.
  */
 public class ConsoleUI implements UserInterface {
 	private static Pattern PATTERN = Pattern.compile("(X|x)|(([MO|mo])([A-I|a-i])([0-8]))");
-
+	
+	boolean close = false;
 	/** Playing field. */
 	private Field field;
 
@@ -42,14 +42,13 @@ public class ConsoleUI implements UserInterface {
 			update();
 			if (field.getState().equals(GameState.SOLVED)) {
 				System.out.println("You WON");
-				System.exit(0);
+				new GameFinishedService().addRatingAndComments("minesweeper");
 			}
 			if (field.getState().equals(GameState.FAILED)) {
 				System.out.println("You LOST");
-				System.exit(0);
 			}
 			processInput();
-		} while (true);
+		} while (close = false);
 	}
 	
 	/*
@@ -130,9 +129,8 @@ public class ConsoleUI implements UserInterface {
 				exit = "";
 			}
 			if (exit.toLowerCase().equals("x")) {
-				System.out.println();
-				Game game = new MenuConsoleUI();
-				game.run();
+				close = true;
+				
 
 			} else if (commandTyp.toLowerCase().equals("o") || commandTyp.toLowerCase().equals("m")) {
 				char rowChar = rowString.charAt(0);

@@ -7,6 +7,4 @@ public interface CommentService {
 	void add(Comment comment);
 	
 	List<Comment> findCommentsForGame(String game);
-	
-	List<Comment> findCommentForGame(String game, String user);
 }

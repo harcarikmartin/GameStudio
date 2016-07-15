@@ -3,15 +3,15 @@ package sk.tsystems.gamestudio.game.stones.consoleui;
 import java.util.Scanner;
 
 import sk.tsystems.gamestudio.game.stones.core.Field;
-import sk.tsystems.gamestudio.menu.Game;
-import sk.tsystems.gamestudio.menu.consoleui.MenuConsoleUI;
-
+import sk.tsystems.gamestudio.service.GameFinishedService;
+import sk.tsystems.gamestudio.service.ScoreListing;
 
 public class ConsoleUi {
 	
 	private Field field;
 
 	private Scanner scanner;
+	boolean close = false;
 
 	public ConsoleUi() {
 		field = Field.load();
@@ -22,13 +22,21 @@ public class ConsoleUi {
 	}
 
 	public void run() {
+		System.out.println("Best scores: ");
+		new ScoreListing("stones");
 		do {
-			show();
-			processInput();
+			if(!close) {
+				show();
+				processInput();
+			} else {
+				break;
+			}
 		} while (!field.isSolved());
-		System.out.println("You won the Game!");
+		if(!close) {
+			new GameFinishedService().addRatingAndComments("stones");
+		}
 	}
-
+	
 	public void show() {
 		System.out.printf("Time: %03d s\n", field.getPlayingSeconds());
 		for (int row = 0; row < field.getRowCount(); row++) {
@@ -75,9 +83,8 @@ public class ConsoleUi {
 		case "x":
 		case "exit":
 			field.save();
-			System.out.println();
-			Game game = new MenuConsoleUI();
-			game.run();
+			close = true;
+			break;
 		case "n":
 		case "new":
 			newField();

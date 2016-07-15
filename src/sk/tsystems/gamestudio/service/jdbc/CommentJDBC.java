@@ -2,14 +2,17 @@ package sk.tsystems.gamestudio.service.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import sk.tsystems.gamestudio.entity.Comment;
 import sk.tsystems.gamestudio.service.CommentService;
 
 public class CommentJDBC implements CommentService{
-	public static final String ADD_COMMENT = "INSERT INTO comments (comments, id_game, id_player) VALUES (?, ?, ?)";
+	public static final String ADD_COMMENT = "INSERT INTO comments (id, comments, id_game, id_player) VALUES (ids.nextval, ?, ?, ?)";
+	public static final String GET_COMMENTS = "select comments from comments where id_game = ?";
 	
 	NameToId id = new NameToId();
 	
@@ -28,14 +31,19 @@ public class CommentJDBC implements CommentService{
 
 	@Override
 	public List<Comment> findCommentsForGame(String game) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Comment> findCommentForGame(String game, String user) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Comment> comments = new ArrayList<>();
+		try (Connection c = new DBConnection().connectToDB();
+				PreparedStatement stmt = c.prepareStatement(GET_COMMENTS)) {
+				stmt.setInt(1, id.getGameId(game));
+				try (ResultSet rs = stmt.executeQuery()) {
+					while(rs.next()) {
+						comments.add(new Comment(rs.getString(1)));
+					}
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return comments;
 	}
 
 }

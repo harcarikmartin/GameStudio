@@ -10,7 +10,7 @@ public class Rating {
 		this.setPlayerName(playerName);
 		this.setGameName(gameName);
 	}
-
+	
 	public String getGameName() {
 		return gameName;
 	}
