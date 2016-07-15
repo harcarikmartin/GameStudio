@@ -22,7 +22,6 @@ public class Test {
 		query.setParameter("meno", "Ferko");
 		System.out.println(query.getResultList());
 		
-		
 		JpaHelper.beginTransaction();
 		student = em.find(Student.class, 6);
 		student.setVek(20);
