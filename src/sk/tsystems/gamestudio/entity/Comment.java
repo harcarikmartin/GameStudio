@@ -47,4 +47,12 @@ public class Comment {
 	public void setGameName(String gameName) {
 		this.gameName = gameName;
 	}
+
+	@Override
+	public String toString() {
+		return "Comment [ident=" + ident + ", comment=" + comment + ", playerName=" + playerName + ", gameName="
+				+ gameName + "]";
+	}
+	
+	
 }

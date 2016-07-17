@@ -1,8 +1,20 @@
 package sk.tsystems.gamestudio.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Score {
+	
+	@Id
+	@GeneratedValue
+	private int ident;
+	
 	private int score;
+	
 	private String playerName;
+	
 	private String gameName;
 	
 	public Score(int score, String playerName, String gameName) {
@@ -37,6 +49,12 @@ public class Score {
 
 	public void setGameName(String gameName) {
 		this.gameName = gameName;
+	}
+
+	@Override
+	public String toString() {
+		return "Score [ident=" + ident + ", score=" + score + ", playerName=" + playerName + ", gameName=" + gameName
+				+ "]";
 	}
 	
 	
