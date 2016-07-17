@@ -3,8 +3,6 @@ package sk.tsystems.gamestudio.game.minesweeper;
 import sk.tsystems.gamestudio.game.minesweeper.consoleui.ConsoleUI;
 import sk.tsystems.gamestudio.game.minesweeper.core.Field;
 import sk.tsystems.gamestudio.menu.Game;
-import sk.tsystems.gamestudio.service.ScoreListing;
-import sk.tsystems.gamestudio.service.jdbc.ScoreJDBC;
 
 /**
  * Main application class.

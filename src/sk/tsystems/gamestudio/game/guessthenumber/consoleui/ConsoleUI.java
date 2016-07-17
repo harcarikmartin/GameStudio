@@ -1,16 +1,17 @@
 package sk.tsystems.gamestudio.game.guessthenumber.consoleui;
 
 import sk.tsystems.gamestudio.game.guessthenumber.core.GuessTheNumber;
-import sk.tsystems.gamestudio.service.GameFinishedService;
+import sk.tsystems.gamestudio.service.ScoreListing;
 
 public class ConsoleUI {
-	private static GuessTheNumber gtn = new GuessTheNumber();
+	ScoreListing sl = new ScoreListing("gtn");
 	
 	public void run() {
-		System.out.println("You win!");
-		System.out.println("The number was : " + gtn.getNumberToGuess());
-		System.out.println("It took you " + gtn.getNumberOfTries() + " tries.");
-		new GameFinishedService().addRatingAndComments("gtn");
+		System.out.println("Best scores: ");
+		new ScoreListing("gtn").print();
+		new GuessTheNumber();
+		System.out.println("Best scores: ");
+		new ScoreListing("gtn").print();
 	}
 	
 }

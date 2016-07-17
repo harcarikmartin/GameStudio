@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import sk.tsystems.gamestudio.entity.Score;
 import sk.tsystems.gamestudio.game.minesweeper.Minesweeper;
 import sk.tsystems.gamestudio.game.minesweeper.UserInterface;
 import sk.tsystems.gamestudio.game.minesweeper.core.Clue;
@@ -15,14 +16,13 @@ import sk.tsystems.gamestudio.game.minesweeper.core.Mine;
 import sk.tsystems.gamestudio.game.minesweeper.core.Tile.State;
 import sk.tsystems.gamestudio.service.GameFinishedService;
 import sk.tsystems.gamestudio.service.ScoreListing;
+import sk.tsystems.gamestudio.service.jdbc.ScoreJDBC;
 
 /**
  * Console user interface.
  */
 public class ConsoleUI implements UserInterface {
 	private static Pattern PATTERN = Pattern.compile("(X|x)|(([MO|mo])([A-I|a-i])([0-8]))");
-	
-	boolean close = false;
 	/** Playing field. */
 	private Field field;
 
@@ -39,20 +39,22 @@ public class ConsoleUI implements UserInterface {
 	public void newGameStarted(Field field) {
 		this.field = field;
 		System.out.println("Best scores: ");
-		ScoreListing sc = new ScoreListing("minesweeper");
+		new ScoreListing("minesweeper").print();
 		do {
 			update();
 			if (field.getState().equals(GameState.SOLVED)) {
 				System.out.println("You WON");
+				int score = (int) Minesweeper.getInstance().getPlayingSeconds();
+				new ScoreJDBC().add(new Score(score, System.getProperty("user.name"), "minesweeper"));
 				new GameFinishedService().addRatingAndComments("minesweeper");
 				System.out.println("Best scores: ");
-				System.out.println(sc);
+				new ScoreListing("minesweeper").print();
 			}
 			if (field.getState().equals(GameState.FAILED)) {
 				System.out.println("You LOST");
 			}
 			processInput();
-		} while (close = false);
+		} while (true);
 	}
 	
 	/*
@@ -133,10 +135,10 @@ public class ConsoleUI implements UserInterface {
 				exit = "";
 			}
 			if (exit.toLowerCase().equals("x")) {
-				close = true;
-				
+				System.exit(0);
+			}	
 
-			} else if (commandTyp.toLowerCase().equals("o") || commandTyp.toLowerCase().equals("m")) {
+			else if (commandTyp.toLowerCase().equals("o") || commandTyp.toLowerCase().equals("m")) {
 				char rowChar = rowString.charAt(0);
 				int row = 0;
 				int column = Integer.parseInt(columnString);

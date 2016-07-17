@@ -11,7 +11,7 @@ import sk.tsystems.gamestudio.entity.Comment;
 import sk.tsystems.gamestudio.service.CommentService;
 
 public class CommentJDBC implements CommentService{
-	public static final String ADD_COMMENT = "INSERT INTO comments (id, comments, id_game, id_player) VALUES (ids.nextval, ?, ?, ?)";
+	public static final String ADD_COMMENT = "INSERT INTO comments (id, comments, id_game, id_player) VALUES (nextval('id'), ?, ?, ?)";
 	public static final String GET_COMMENTS = "select comments from comments where id_game = ?";
 	
 	NameToId id = new NameToId();

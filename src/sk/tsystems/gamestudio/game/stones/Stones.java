@@ -2,7 +2,6 @@ package sk.tsystems.gamestudio.game.stones;
 
 import sk.tsystems.gamestudio.game.stones.consoleui.ConsoleUi;
 import sk.tsystems.gamestudio.menu.Game;
-import sk.tsystems.gamestudio.service.ScoreListing;
 
 public class Stones implements Game {
 	private ConsoleUi console;
@@ -14,5 +13,5 @@ public class Stones implements Game {
 	@Override
 	public void run() {
 		console.run();
-	}
+	}	
 }

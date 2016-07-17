@@ -53,8 +53,7 @@ public class Field implements Serializable {
 		}
 		values.add(EMPTY_CELL);
 
-		Collections.shuffle(values);
-		
+//		Collections.shuffle(values);
 		
 		int index = 0;
 		for (int row = 0; row < rowCount; row++) {
@@ -64,7 +63,7 @@ public class Field implements Serializable {
 				index++;
 			}
 		}
-//		moveDown();
+		moveDown();
 	}
 
 	private Position getPositionOf(int value) {
