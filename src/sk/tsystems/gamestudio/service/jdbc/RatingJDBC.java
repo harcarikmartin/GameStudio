@@ -35,7 +35,7 @@ public class RatingJDBC implements RatingService {
 						}
 					} 
 					try (PreparedStatement stmt = c.prepareStatement(ADD_RATING)) {
-						stmt.setString(1, rating.getRating());
+						stmt.setInt(1, Integer.parseInt(rating.getRating()));
 						stmt.setInt(2, gameId);
 						stmt.setInt(3, playerId);
 						stmt.executeUpdate();

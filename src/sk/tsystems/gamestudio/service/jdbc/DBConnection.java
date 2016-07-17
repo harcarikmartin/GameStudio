@@ -5,10 +5,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-	private static final String URL = "jdbc:oracle:thin:@localhost:1521/XE";
-	private static final String USER = "GameCenter";
-	private static final String PASSWORD = "Gamecenter";
+//	private static final String URL = "jdbc:oracle:thin:@localhost:1521/XE";
+//	private static final String USER = "GameCenter";
+//	private static final String PASSWORD = "Gamecenter";
 
+	private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
+	private static final String USER = "Gamecenter";
+	private static final String PASSWORD = "Gamecenter";
+	
 	public Connection connectToDB() {
 		Connection c = null;
 		try {
