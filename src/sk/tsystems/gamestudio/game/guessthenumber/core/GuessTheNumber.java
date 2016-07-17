@@ -2,14 +2,12 @@ package sk.tsystems.gamestudio.game.guessthenumber.core;
 
 import java.util.Random;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 import sk.tsystems.gamestudio.entity.Score;
 import sk.tsystems.gamestudio.service.GameFinishedService;
 import sk.tsystems.gamestudio.service.jdbc.ScoreJDBC;
 
 public class GuessTheNumber {
-	private static Pattern PATTERN = Pattern.compile("X|x");
 	private static final int INTERVAL = 100;
 	private Random rn = new Random();
 	private int numberToGuess = rn.nextInt(INTERVAL);
