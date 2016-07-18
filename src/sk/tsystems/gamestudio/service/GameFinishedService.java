@@ -6,7 +6,7 @@ import java.util.Scanner;
 import sk.tsystems.gamestudio.entity.CommentJ;
 import sk.tsystems.gamestudio.entity.RatingJ;
 import sk.tsystems.gamestudio.service.jdbc.CommentJDBC;
-import sk.tsystems.gamestudio.service.jdbc.RatingJDBC;
+import sk.tsystems.gamestudio.service.jpa.RatingJpa;
 
 public class GameFinishedService {
 	private Scanner scanner = new Scanner(System.in);
@@ -28,7 +28,7 @@ public class GameFinishedService {
 				case "3":
 				case "4":
 				case "5":
-					new RatingJDBC().add(new RatingJ(line, System.getProperty("user.name"), gameName));
+					new RatingJpa().add(new RatingJ(Integer.parseInt(line), System.getProperty("user.name"), gameName));
 					added = true;
 					break;
 				default:
@@ -45,6 +45,7 @@ public class GameFinishedService {
 		case "y":
 			System.out.println("Add your comment: ");
 			line = scanner.nextLine().trim();
+			
 			new CommentJDBC().add(new CommentJ(line, System.getProperty("user.name"), gameName));
 			System.out.println("Comment added.");
 			break;

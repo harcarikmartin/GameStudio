@@ -11,13 +11,17 @@ public class RatingJ {
 	@GeneratedValue
 	private int ident;
 	
-	private String rating;
+	private int rating;
 	
 	private String playerName;
 	
 	private String gameName;
 	
-	public RatingJ(String rating, String playerName, String gameName) {
+	public RatingJ() {
+		super();
+	}
+
+	public RatingJ(int rating, String playerName, String gameName) {
 		this.setRating(rating);
 		this.setPlayerName(playerName);
 		this.setGameName(gameName);
@@ -39,11 +43,11 @@ public class RatingJ {
 		this.playerName = playerName;
 	}
 
-	public String getRating() {
+	public int getRating() {
 		return rating;
 	}
 
-	public void setRating(String rating) {
+	public void setRating(int rating) {
 		this.rating = rating;
 	}
 

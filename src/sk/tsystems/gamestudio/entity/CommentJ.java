@@ -14,6 +14,10 @@ public class CommentJ {
 	private String playerName;
 	private String gameName;
 	
+	public CommentJ() {
+		super();
+	}
+
 	public CommentJ(String comment, String playerName, String gameName) {
 		this.setComment(comment);
 		this.setPlayerName(playerName);

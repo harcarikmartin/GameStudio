@@ -9,6 +9,7 @@ import sk.tsystems.gamestudio.game.minesweeper.Minesweeper;
 import sk.tsystems.gamestudio.game.stones.Stones;
 import sk.tsystems.gamestudio.menu.Game;
 import sk.tsystems.gamestudio.service.jdbc.RatingJDBC;
+import sk.tsystems.gamestudio.service.jpa.RatingJpa;
 
 public class MenuConsoleUI implements Game {
 	private BufferedReader input = new BufferedReader(new InputStreamReader(
@@ -61,8 +62,8 @@ public class MenuConsoleUI implements Game {
 			} else {
 //				System.out.println("Game: " + option.toString().toLowerCase());
 				System.out.printf("%2d. %-20s %-15d %-15f%n", option.ordinal() + 1, option, 
-						new RatingJDBC().findRatingsCountForGame(option.toString().toLowerCase()), 
-						new RatingJDBC().findAverageRatingForGame(option.toString().toLowerCase()));
+						new RatingJpa().findRatingsCountForGame(option.toString().toLowerCase()), 
+						new RatingJpa().findAverageRatingForGame(option.toString().toLowerCase()));
 			}
 		}
 		System.out.println("---------------------------------------------------");
