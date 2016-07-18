@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import sk.tsystems.gamestudio.entity.Score;
+import sk.tsystems.gamestudio.entity.ScoreJ;
 import sk.tsystems.gamestudio.service.ScoreService;
 
 public class ScoreJDBC implements ScoreService{
@@ -18,7 +18,7 @@ public class ScoreJDBC implements ScoreService{
 	NameToId id = new NameToId();
 	
 	@Override
-	public void add(Score score) {
+	public void add(ScoreJ score) {
 		try (Connection c = new DBConnection().connectToDB();
 				PreparedStatement stmt = c.prepareStatement(ADD_SCORE)) {
 				stmt.setInt(1, score.getScore());
@@ -32,14 +32,14 @@ public class ScoreJDBC implements ScoreService{
 	}
 
 	@Override
-	public List<Score> findTenBestScoresForGame(String game) {
-		List<Score> scores = new ArrayList<>();
+	public List<ScoreJ> findTenBestScoresForGame(String game) {
+		List<ScoreJ> scores = new ArrayList<>();
 		try (Connection c = new DBConnection().connectToDB();
 				PreparedStatement stmt = c.prepareStatement(GET_BEST_SCORES)) {
 				stmt.setString(1, game);
 				try (ResultSet rs = stmt.executeQuery()) {
 					while(rs.next()) {
-						scores.add(new Score(rs.getInt(1), rs.getString(2), rs.getString(3)));
+						scores.add(new ScoreJ(rs.getInt(1), rs.getString(2), rs.getString(3)));
 					}
 				}
 				return scores;

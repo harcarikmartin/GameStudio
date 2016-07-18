@@ -2,7 +2,7 @@ package sk.tsystems.gamestudio.game.stones.consoleui;
 
 import java.util.Scanner;
 
-import sk.tsystems.gamestudio.entity.Score;
+import sk.tsystems.gamestudio.entity.ScoreJ;
 import sk.tsystems.gamestudio.game.stones.core.Field;
 import sk.tsystems.gamestudio.service.GameFinishedService;
 import sk.tsystems.gamestudio.service.ScoreListing;
@@ -34,7 +34,7 @@ public class ConsoleUi {
 		} while (!field.isSolved());
 		if(!close) {
 			int score = field.getColumnCount() * field.getRowCount() * 1000 - field.getPlayingSeconds();
-			new ScoreJDBC().add(new Score(score, System.getProperty("user.name"), "stones"));
+			new ScoreJDBC().add(new ScoreJ(score, System.getProperty("user.name"), "stones"));
 			new GameFinishedService().addRatingAndComments("stones");
 			System.out.println("Best scores: ");
 			new ScoreListing("stones").print();

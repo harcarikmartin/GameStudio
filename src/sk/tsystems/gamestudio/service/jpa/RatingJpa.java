@@ -1,13 +1,13 @@
 package sk.tsystems.gamestudio.service.jpa;
 
 import sk.ness.jpa.JpaHelper;
-import sk.tsystems.gamestudio.entity.Rating;
+import sk.tsystems.gamestudio.entity.RatingJ;
 import sk.tsystems.gamestudio.service.RatingService;
 
 public class RatingJpa implements RatingService{
 
 	@Override
-	public void add(Rating rating) {
+	public void add(RatingJ rating) {
 		JpaHelper.beginTransaction();
 		JpaHelper.getEntityManager().persist(rating);
 		JpaHelper.commitTransaction();

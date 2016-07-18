@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import sk.tsystems.gamestudio.entity.Rating;
+import sk.tsystems.gamestudio.entity.RatingJ;
 import sk.tsystems.gamestudio.service.RatingService;
 
 public class RatingJDBC implements RatingService {
@@ -18,7 +18,7 @@ public class RatingJDBC implements RatingService {
 	NameToId id = new NameToId();
 	
 	@Override
-	public void add(Rating rating) {
+	public void add(RatingJ rating) {
 		int gameId = id.getGameId(rating.getGameName());
 		int playerId = id.getPlayerId(rating.getPlayerName());
 //		System.out.println("GameId = " + gameId + " PlayerId = " + playerId);

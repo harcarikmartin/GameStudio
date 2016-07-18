@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Comment {
+public class CommentJ {
 	@Id
 	@GeneratedValue
 	private int ident;
@@ -14,13 +14,13 @@ public class Comment {
 	private String playerName;
 	private String gameName;
 	
-	public Comment(String comment, String playerName, String gameName) {
+	public CommentJ(String comment, String playerName, String gameName) {
 		this.setComment(comment);
 		this.setPlayerName(playerName);
 		this.setGameName(gameName);
 	}
 	
-	public Comment(String comment) {
+	public CommentJ(String comment) {
 		this(comment, null, null);
 	}
 

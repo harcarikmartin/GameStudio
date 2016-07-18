@@ -1,10 +1,10 @@
 package sk.tsystems.gamestudio.service;
 
 import java.util.List;
-import sk.tsystems.gamestudio.entity.Comment;
+import sk.tsystems.gamestudio.entity.CommentJ;
 
 public interface CommentService {
-	void add(Comment comment);
+	void add(CommentJ comment);
 	
-	List<Comment> findCommentsForGame(String game);
+	List<CommentJ> findCommentsForGame(String game);
 }

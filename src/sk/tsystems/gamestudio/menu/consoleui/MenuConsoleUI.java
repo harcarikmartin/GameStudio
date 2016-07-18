@@ -20,6 +20,7 @@ public class MenuConsoleUI implements Game {
 	public void run() {
 		boolean run = true;
 		System.out.println(System.getProperty("user.name") + ", welcome to GameCenter, choose the Game you want to play.");
+		System.out.println("All games are set ultra easy for presentation purposes...");
 		while (run == true) {
 			Game game = null;
 			switch (showMenu()) {

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import sk.tsystems.gamestudio.entity.Comment;
+import sk.tsystems.gamestudio.entity.CommentJ;
 import sk.tsystems.gamestudio.service.CommentService;
 
 public class CommentJDBC implements CommentService{
@@ -17,7 +17,7 @@ public class CommentJDBC implements CommentService{
 	NameToId id = new NameToId();
 	
 	@Override
-	public void add(Comment comment) {
+	public void add(CommentJ comment) {
 		try (Connection c = new DBConnection().connectToDB();
 				PreparedStatement stmt = c.prepareStatement(ADD_COMMENT)) {
 				stmt.setString(1, comment.getComment());
@@ -30,14 +30,14 @@ public class CommentJDBC implements CommentService{
 	}
 
 	@Override
-	public List<Comment> findCommentsForGame(String game) {
-		List<Comment> comments = new ArrayList<>();
+	public List<CommentJ> findCommentsForGame(String game) {
+		List<CommentJ> comments = new ArrayList<>();
 		try (Connection c = new DBConnection().connectToDB();
 				PreparedStatement stmt = c.prepareStatement(GET_COMMENTS)) {
 				stmt.setInt(1, id.getGameId(game));
 				try (ResultSet rs = stmt.executeQuery()) {
 					while(rs.next()) {
-						comments.add(new Comment(rs.getString(1)));
+						comments.add(new CommentJ(rs.getString(1)));
 					}
 				}
 		} catch (SQLException e) {

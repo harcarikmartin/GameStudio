@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import sk.tsystems.gamestudio.entity.Score;
+import sk.tsystems.gamestudio.entity.ScoreJ;
 import sk.tsystems.gamestudio.game.minesweeper.Minesweeper;
 import sk.tsystems.gamestudio.game.minesweeper.UserInterface;
 import sk.tsystems.gamestudio.game.minesweeper.core.Clue;
@@ -25,6 +25,8 @@ public class ConsoleUI implements UserInterface {
 	private static Pattern PATTERN = Pattern.compile("(X|x)|(([MO|mo])([A-I|a-i])([0-8]))");
 	/** Playing field. */
 	private Field field;
+	
+	private boolean playing = true;
 
 	/** Input reader. */
 	private BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -45,7 +47,7 @@ public class ConsoleUI implements UserInterface {
 			if (field.getState().equals(GameState.SOLVED)) {
 				System.out.println("You WON");
 				int score = (int) Minesweeper.getInstance().getPlayingSeconds();
-				new ScoreJDBC().add(new Score(score, System.getProperty("user.name"), "minesweeper"));
+				new ScoreJDBC().add(new ScoreJ(score, System.getProperty("user.name"), "minesweeper"));
 				new GameFinishedService().addRatingAndComments("minesweeper");
 				System.out.println("Best scores: ");
 				new ScoreListing("minesweeper").print();
@@ -54,7 +56,7 @@ public class ConsoleUI implements UserInterface {
 				System.out.println("You LOST");
 			}
 			processInput();
-		} while (true);
+		} while (playing);
 	}
 	
 	/*
@@ -135,7 +137,7 @@ public class ConsoleUI implements UserInterface {
 				exit = "";
 			}
 			if (exit.toLowerCase().equals("x")) {
-				System.exit(0);
+				playing = false;
 			}	
 
 			else if (commandTyp.toLowerCase().equals("o") || commandTyp.toLowerCase().equals("m")) {

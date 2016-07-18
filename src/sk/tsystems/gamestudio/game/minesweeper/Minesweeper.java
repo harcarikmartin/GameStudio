@@ -21,7 +21,7 @@ public class Minesweeper implements Game {
 	public Minesweeper() {
 		instance = this;
 		userInterface = new ConsoleUI();
-		setSetting(Settings.BEGINNER);
+		setSetting(Settings.PRESENTATION);
 		setting = getSetting();
 	}
 	
