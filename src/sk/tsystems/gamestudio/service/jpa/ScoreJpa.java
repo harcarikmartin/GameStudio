@@ -17,7 +17,7 @@ public class ScoreJpa implements ScoreService{
 
 	@Override
 	public List<ScoreJ> findTenBestScoresForGame(String game) {
-		return JpaHelper.getEntityManager().createQuery("Select s from Score s where s.gameName = :gameName").setParameter("gameName", game).getResultList();
+		return JpaHelper.getEntityManager().createQuery("Select s from ScoreJ s where s.gameName = :gameName").setParameter("gameName", game).getResultList();
 		
 	}
 

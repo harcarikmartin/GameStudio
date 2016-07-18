@@ -17,6 +17,12 @@ public class ScoreJ {
 	
 	private String gameName;
 	
+	
+	
+	public ScoreJ() {
+		super();
+	}
+
 	public ScoreJ(int score, String playerName, String gameName) {
 		this.setScore(score);
 		this.setPlayerName(playerName);

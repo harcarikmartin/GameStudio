@@ -18,7 +18,7 @@ public class CommentJpa implements CommentService {
 
 	@Override
 	public List<CommentJ> findCommentsForGame(String game) {
-		return JpaHelper.getEntityManager().createQuery("Select c from Comments c where c.gameName = :gameName").setParameter("gameName", game).getResultList();
+		return JpaHelper.getEntityManager().createQuery("Select c from CommentJ c where c.gameName = :gameName").setParameter("gameName", game).getResultList();
 	}
 	
 }

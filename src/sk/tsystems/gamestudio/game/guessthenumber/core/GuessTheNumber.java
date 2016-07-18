@@ -6,6 +6,7 @@ import java.util.Scanner;
 import sk.tsystems.gamestudio.entity.ScoreJ;
 import sk.tsystems.gamestudio.service.GameFinishedService;
 import sk.tsystems.gamestudio.service.jdbc.ScoreJDBC;
+import sk.tsystems.gamestudio.service.jpa.ScoreJpa;
 
 public class GuessTheNumber {
 	private static final int INTERVAL = 10;
@@ -47,7 +48,7 @@ public class GuessTheNumber {
 			System.out.println("The number was : " + getNumberToGuess());
 			System.out.println("It took you " + getNumberOfTries() + " tries.");
 			int score = 5 * INTERVAL - getNumberOfTries();
-			new ScoreJDBC().add(new ScoreJ(score, System.getProperty("user.name"), "gtn"));
+			new ScoreJpa().add(new ScoreJ(score, System.getProperty("user.name"), "gtn"));
 			new GameFinishedService().addRatingAndComments("gtn");
 		} else {
 			System.out.println("Game conceded, exit.");

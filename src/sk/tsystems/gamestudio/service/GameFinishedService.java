@@ -6,6 +6,7 @@ import java.util.Scanner;
 import sk.tsystems.gamestudio.entity.CommentJ;
 import sk.tsystems.gamestudio.entity.RatingJ;
 import sk.tsystems.gamestudio.service.jdbc.CommentJDBC;
+import sk.tsystems.gamestudio.service.jpa.CommentJpa;
 import sk.tsystems.gamestudio.service.jpa.RatingJpa;
 
 public class GameFinishedService {
@@ -46,7 +47,7 @@ public class GameFinishedService {
 			System.out.println("Add your comment: ");
 			line = scanner.nextLine().trim();
 			
-			new CommentJDBC().add(new CommentJ(line, System.getProperty("user.name"), gameName));
+			new CommentJpa().add(new CommentJ(line, System.getProperty("user.name"), gameName));
 			System.out.println("Comment added.");
 			break;
 		default:
@@ -54,7 +55,7 @@ public class GameFinishedService {
 			line = scanner.nextLine().toLowerCase().trim();
 				if(line.equals("y")) {
 					System.out.println("Listing comments..");
-					List<CommentJ> list = new CommentJDBC().findCommentsForGame(gameName);
+					List<CommentJ> list = new CommentJpa().findCommentsForGame(gameName);
 					if(list.size() != 0) {
 						for(CommentJ comment : list) {
 							System.out.println("-> " + comment.getComment());
