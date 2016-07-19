@@ -2,7 +2,7 @@ package sk.tsystems.gamestudio.service.jpa;
 
 import java.util.List;
 
-import sk.ness.jpa.JpaHelper;
+import sk.testJpa.jpa.JpaHelper;
 import sk.tsystems.gamestudio.entity.CommentJ;
 import sk.tsystems.gamestudio.service.CommentService;
 

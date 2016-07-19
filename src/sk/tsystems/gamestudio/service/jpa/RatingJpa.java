@@ -1,6 +1,6 @@
 package sk.tsystems.gamestudio.service.jpa;
 
-import sk.ness.jpa.JpaHelper;
+import sk.testJpa.jpa.JpaHelper;
 import sk.tsystems.gamestudio.entity.RatingJ;
 import sk.tsystems.gamestudio.service.RatingService;
 
