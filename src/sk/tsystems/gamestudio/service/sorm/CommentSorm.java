@@ -9,7 +9,6 @@ public class CommentSorm implements CommentService {
 	@Override
 	public void add(CommentJ comment) {
 		
-		
 	}
 
 	@Override

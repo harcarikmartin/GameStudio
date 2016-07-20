@@ -3,12 +3,11 @@ package sk.tsystems.gamestudio.menu.consoleui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import sk.testJpa.jpa.JpaHelper;
 import sk.tsystems.gamestudio.game.guessthenumber.Gtn;
 import sk.tsystems.gamestudio.game.minesweeper.Minesweeper;
 import sk.tsystems.gamestudio.game.stones.Stones;
 import sk.tsystems.gamestudio.menu.Game;
-import sk.tsystems.gamestudio.service.jdbc.RatingJDBC;
 import sk.tsystems.gamestudio.service.jpa.RatingJpa;
 
 public class MenuConsoleUI implements Game {
@@ -38,6 +37,7 @@ public class MenuConsoleUI implements Game {
 				System.out.println("Thanks for visiting Game Studio.");
 				run = false;
 				System.out.println("Game Studio closed.");
+				JpaHelper.closeAll();
 			}
 			if(run == true) {
 				game.run();
@@ -64,6 +64,8 @@ public class MenuConsoleUI implements Game {
 				System.out.printf("%2d. %-20s %-15d %-15f%n", option.ordinal() + 1, option, 
 						new RatingJpa().findRatingsCountForGame(option.toString().toLowerCase()), 
 						new RatingJpa().findAverageRatingForGame(option.toString().toLowerCase()));
+//						new RatingJDBC().findRatingsCountForGame(option.toString().toLowerCase()), 
+//						new RatingJDBC().findAverageRatingForGame(option.toString().toLowerCase()));
 			}
 		}
 		System.out.println("---------------------------------------------------");

@@ -34,6 +34,7 @@ public class RatingJpa implements RatingService{
 	private void deleteRating(RatingJ rating) {
 		JpaHelper.beginTransaction();
 		EntityManager em = JpaHelper.getEntityManager();
+//		em.remove(rating);
 		Query query = em.createQuery("delete from RatingJ r where r.gameName = :gameName and r.playerName = :playerName");
 		query.setParameter("gameName", rating.getGameName());
 		query.setParameter("playerName", rating.getPlayerName());

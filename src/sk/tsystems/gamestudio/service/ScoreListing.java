@@ -11,6 +11,7 @@ public class ScoreListing {
 	
 	public ScoreListing(String gameName) {
 		scores = new ScoreJpa().findTenBestScoresForGame(gameName);
+//		scores = new ScoreJDBC().findTenBestScoresForGame(gameName);
 		}
 	
 	public void print() {
