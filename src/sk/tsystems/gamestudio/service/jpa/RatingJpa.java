@@ -1,5 +1,8 @@
 package sk.tsystems.gamestudio.service.jpa;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import sk.testJpa.jpa.JpaHelper;
 import sk.tsystems.gamestudio.entity.jpa.Game;
 import sk.tsystems.gamestudio.entity.jpa.Rating;
@@ -13,7 +16,14 @@ public class RatingJpa {
 	}
 	
 	public int findRatingsCountForGame(Game game) {
-		return 0;
+		EntityManager em = JpaHelper.getEntityManager();
+		Query query = em.createQuery("Select count(r) from Rating r where r.gameName = :gameName");
+		query.setParameter("gameName", game);
+		if(query.getResultList().isEmpty()) {
+			return 0;
+		} else {
+			return 0;
+		}
 		//Integer.parseInt( JpaHelper.getEntityManager().createQuery("Select count(r.gameName) from RatingJ r where r.gameName = :gameName").setParameter("gameName", gameName).getSingleResult().toString());
 	}
 
