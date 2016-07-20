@@ -4,13 +4,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import sk.tsystems.gamestudio.entity.jpa.Comment;
+import sk.tsystems.gamestudio.entity.jpa.Game;
+import sk.tsystems.gamestudio.entity.jpa.Player;
 import sk.tsystems.gamestudio.game.guessthenumber.Gtn;
 import sk.tsystems.gamestudio.game.minesweeper.Minesweeper;
 import sk.tsystems.gamestudio.game.stones.Stones;
-import sk.tsystems.gamestudio.menu.Game;
-import sk.tsystems.gamestudio.service.jdbc.RatingJDBC;
+import sk.tsystems.gamestudio.menu.GameI;
+import sk.tsystems.gamestudio.service.jpa.CommentJpa;
+import sk.tsystems.gamestudio.service.jpa.GameJpa;
+import sk.tsystems.gamestudio.service.jpa.PlayerJpa;
+import sk.tsystems.gamestudio.service.jpasimple.RatingJpa;
 
-public class MenuConsoleUI implements Game {
+public class MenuConsoleUI implements GameI {
 	private BufferedReader input = new BufferedReader(new InputStreamReader(
 			System.in));
 	public enum Option {
@@ -18,10 +24,35 @@ public class MenuConsoleUI implements Game {
 	}
 	
 	public void run() {
+//		Player player = new Player(System.getProperty("user.name"));
+//		if(new PlayerJpa().isPresent(player)) {
+//			System.out.println("Player Je");
+//		} else {
+//			System.out.println("Player Neni");
+//		}
+//		
+//		Game games = new Game("minesweeper");
+//		if(new GameJpa().isPresent(games)) {
+//			System.out.println("Game Je");
+//		} else {
+//			System.out.println("Game Neni");
+//		}
+		
+		Comment comment = new Comment();
+		comment.setComment("commentjpa");
+//		comment.setPlayer(player);
+//		comment.setGame(games);
+		Player player = new PlayerJpa().setPresentPlayer(System.getProperty("user.name"));
+		Game gm = new GameJpa().setPresentGame("minesweeper");
+		comment.setPlayer(player);
+		comment.setGame(gm);
+		new CommentJpa().addComment(comment);
+		
 		boolean run = true;
 		System.out.println(System.getProperty("user.name") + ", welcome to GameCenter, choose the Game you want to play.");
+		System.out.println("All games are set ultra easy for presentation purposes...");
 		while (run == true) {
-			Game game = null;
+			GameI game = null;
 			switch (showMenu()) {
 			case MINESWEEPER:
 				game = new Minesweeper();
@@ -60,8 +91,8 @@ public class MenuConsoleUI implements Game {
 			} else {
 //				System.out.println("Game: " + option.toString().toLowerCase());
 				System.out.printf("%2d. %-20s %-15d %-15f%n", option.ordinal() + 1, option, 
-						new RatingJDBC().findRatingsCountForGame(option.toString().toLowerCase()), 
-						new RatingJDBC().findAverageRatingForGame(option.toString().toLowerCase()));
+						new RatingJpa().findRatingsCountForGame(option.toString().toLowerCase()), 
+						new RatingJpa().findAverageRatingForGame(option.toString().toLowerCase()));
 			}
 		}
 		System.out.println("---------------------------------------------------");

@@ -2,14 +2,15 @@ package sk.tsystems.gamestudio.game.stones.consoleui;
 
 import java.util.Scanner;
 
+import sk.tsystems.gamestudio.entity.ScoreJ;
 import sk.tsystems.gamestudio.game.stones.core.Field;
 import sk.tsystems.gamestudio.service.GameFinishedService;
 import sk.tsystems.gamestudio.service.ScoreListing;
+import sk.tsystems.gamestudio.service.jdbc.ScoreJDBC;
+import sk.tsystems.gamestudio.service.jpasimple.ScoreJpa;
 
 public class ConsoleUi {
-	
 	private Field field;
-
 	private Scanner scanner;
 	boolean close = false;
 
@@ -23,7 +24,7 @@ public class ConsoleUi {
 
 	public void run() {
 		System.out.println("Best scores: ");
-		ScoreListing sc = new ScoreListing("stones");
+		new ScoreListing("stones").print();
 		do {
 			if(!close) {
 				show();
@@ -33,9 +34,11 @@ public class ConsoleUi {
 			}
 		} while (!field.isSolved());
 		if(!close) {
+			int score = field.getColumnCount() * field.getRowCount() * 1000 - field.getPlayingSeconds();
+			new ScoreJpa().add(new ScoreJ(score, System.getProperty("user.name"), "stones"));
 			new GameFinishedService().addRatingAndComments("stones");
 			System.out.println("Best scores: ");
-			System.out.println(sc);
+			new ScoreListing("stones").print();
 		}
 	}
 	
@@ -84,7 +87,7 @@ public class ConsoleUi {
 			break;
 		case "x":
 		case "exit":
-			field.save();
+//			field.save();
 			close = true;
 			break;
 		case "n":

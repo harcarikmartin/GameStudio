@@ -6,7 +6,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Field implements Serializable {
@@ -53,8 +52,7 @@ public class Field implements Serializable {
 		}
 		values.add(EMPTY_CELL);
 
-		Collections.shuffle(values);
-		
+//		Collections.shuffle(values);
 		
 		int index = 0;
 		for (int row = 0; row < rowCount; row++) {
@@ -64,7 +62,7 @@ public class Field implements Serializable {
 				index++;
 			}
 		}
-//		moveDown();
+		moveDown();
 	}
 
 	private Position getPositionOf(int value) {

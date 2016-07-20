@@ -1,9 +1,9 @@
 package sk.tsystems.gamestudio.service;
 
-import sk.tsystems.gamestudio.entity.Rating;
+import sk.tsystems.gamestudio.entity.RatingJ;
 
 public interface RatingService {
-	void add(Rating rating);
+	void add(RatingJ rating);
 	
 	int findRatingsCountForGame(String gameName);
 	

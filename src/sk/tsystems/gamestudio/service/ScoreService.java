@@ -1,10 +1,10 @@
 package sk.tsystems.gamestudio.service;
 
 import java.util.List;
-import sk.tsystems.gamestudio.entity.Score;
+import sk.tsystems.gamestudio.entity.ScoreJ;
 
 public interface ScoreService {
-	void add(Score score);
+	void add(ScoreJ score);
 	
-	List<Score> findTenBestScoresForGame(String game);
+	List<ScoreJ> findTenBestScoresForGame(String game);
 }
