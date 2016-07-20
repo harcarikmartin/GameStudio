@@ -8,9 +8,10 @@ import sk.tsystems.gamestudio.entity.jpa.Player;
 public class PlayerJpa {
 	
 	public Player setPresentPlayer(String playerName) {
-		if(getId(playerName) > 0) {
+		int id = getId(playerName);
+		if(id > 0) {
 			EntityManager em = JpaHelper.getEntityManager();
-			return em.find(Player.class, playerName);
+			return em.find(Player.class, id);
 		} else {
 			return new Player(playerName);
 		}
@@ -21,8 +22,10 @@ public class PlayerJpa {
 		Query query = em.createQuery("select id from Player p where p.playerName = :playerName");
 		query.setParameter("playerName", playerName);
 		if(query.getResultList().isEmpty()) {
+			em.close();
 			return 0;
 		} else {
+			System.out.println((int) query.getResultList().get(0));
 			return (int) query.getResultList().get(0);
 		}
 	}

@@ -9,9 +9,10 @@ import sk.tsystems.gamestudio.entity.jpa.Game;
 public class GameJpa {
 	
 	public Game setPresentGame(String gameName) {
-		if(getId(gameName) > 0) {
+		int id = getId(gameName);
+		if(id > 0) {
 			EntityManager em = JpaHelper.getEntityManager();
-			return em.find(Game.class, gameName);
+			return em.find(Game.class, id);
 		} else {
 			return new Game(gameName);
 		}
