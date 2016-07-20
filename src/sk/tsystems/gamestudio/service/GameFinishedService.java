@@ -6,8 +6,8 @@ import java.util.Scanner;
 import sk.tsystems.gamestudio.entity.CommentJ;
 import sk.tsystems.gamestudio.entity.RatingJ;
 import sk.tsystems.gamestudio.service.jdbc.CommentJDBC;
-import sk.tsystems.gamestudio.service.jpa.CommentJpa;
-import sk.tsystems.gamestudio.service.jpa.RatingJpa;
+import sk.tsystems.gamestudio.service.jpasimple.CommentJpa;
+import sk.tsystems.gamestudio.service.jpasimple.RatingJpa;
 
 public class GameFinishedService {
 	private Scanner scanner = new Scanner(System.in);

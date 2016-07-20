@@ -7,7 +7,7 @@ import sk.tsystems.gamestudio.game.stones.core.Field;
 import sk.tsystems.gamestudio.service.GameFinishedService;
 import sk.tsystems.gamestudio.service.ScoreListing;
 import sk.tsystems.gamestudio.service.jdbc.ScoreJDBC;
-import sk.tsystems.gamestudio.service.jpa.ScoreJpa;
+import sk.tsystems.gamestudio.service.jpasimple.ScoreJpa;
 
 public class ConsoleUi {
 	private Field field;

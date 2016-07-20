@@ -6,7 +6,7 @@ import java.util.Scanner;
 import sk.tsystems.gamestudio.entity.ScoreJ;
 import sk.tsystems.gamestudio.service.GameFinishedService;
 import sk.tsystems.gamestudio.service.jdbc.ScoreJDBC;
-import sk.tsystems.gamestudio.service.jpa.ScoreJpa;
+import sk.tsystems.gamestudio.service.jpasimple.ScoreJpa;
 
 public class GuessTheNumber {
 	private static final int INTERVAL = 10;

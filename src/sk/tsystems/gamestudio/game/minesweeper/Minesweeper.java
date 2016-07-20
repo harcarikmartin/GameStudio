@@ -2,12 +2,12 @@ package sk.tsystems.gamestudio.game.minesweeper;
 
 import sk.tsystems.gamestudio.game.minesweeper.consoleui.ConsoleUI;
 import sk.tsystems.gamestudio.game.minesweeper.core.Field;
-import sk.tsystems.gamestudio.menu.Game;
+import sk.tsystems.gamestudio.menu.GameI;
 
 /**
  * Main application class.
  */
-public class Minesweeper implements Game {
+public class Minesweeper implements GameI {
 	private long startMillis = System.currentTimeMillis();
 	private BestTimes bestTimes = new BestTimes();
 	private static Minesweeper instance;
