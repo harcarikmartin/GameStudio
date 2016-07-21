@@ -47,9 +47,7 @@ public class GuessTheNumber {
 			System.out.println("You win!");
 			System.out.println("The number was : " + getNumberToGuess());
 			System.out.println("It took you " + getNumberOfTries() + " tries.");
-			int score = 5 * INTERVAL - getNumberOfTries();
-			new ScoreJpa().add(new ScoreJ(score, System.getProperty("user.name"), "gtn"));
-			new GameFinishedService().addRatingAndComments("gtn");
+			
 		} else {
 			System.out.println("Game conceded, exit.");
 		}
