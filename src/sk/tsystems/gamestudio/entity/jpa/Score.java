@@ -20,6 +20,9 @@ public class Score {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Game game;
+	
+	public Score() {
+	}
 
 	public Score(int score, Player player, Game game) {
 		this.score = score;

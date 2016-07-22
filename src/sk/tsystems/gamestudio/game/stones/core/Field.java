@@ -51,8 +51,6 @@ public class Field implements Serializable {
 			values.add(i);
 		}
 		values.add(EMPTY_CELL);
-
-//		Collections.shuffle(values);
 		
 		int index = 0;
 		for (int row = 0; row < rowCount; row++) {
@@ -63,6 +61,21 @@ public class Field implements Serializable {
 			}
 		}
 		moveDown();
+		
+		//Shuffling field
+//		Random rn = new Random();
+//		int next = 0;
+//		for (int i = 0; i < 200; i++) {
+//			next = rn.nextInt(8);
+//			switch (next) {
+//			case 1: moveDown();break;
+//			case 2: moveUp();break;
+//			case 3: moveLeft();break;
+//			case 4: moveRight();break;
+//			default:break;
+//			}
+//		}
+		
 	}
 
 	private Position getPositionOf(int value) {

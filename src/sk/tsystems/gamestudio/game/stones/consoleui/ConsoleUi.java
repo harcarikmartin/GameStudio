@@ -6,7 +6,7 @@ import sk.tsystems.gamestudio.entity.ScoreJ;
 import sk.tsystems.gamestudio.game.stones.core.Field;
 import sk.tsystems.gamestudio.service.GameFinishedService;
 import sk.tsystems.gamestudio.service.ScoreListing;
-import sk.tsystems.gamestudio.service.jpasimple.ScoreJpa;
+import sk.tsystems.gamestudio.service.jpasimple.ScoreJpaSimple;
 
 public class ConsoleUi {
 	private Field field;
@@ -34,7 +34,7 @@ public class ConsoleUi {
 		} while (!field.isSolved());
 		if(!close) {
 			int score = field.getColumnCount() * field.getRowCount() * 1000 - field.getPlayingSeconds();
-			new ScoreJpa().add(new ScoreJ(score, System.getProperty("user.name"), "stones"));
+			new ScoreJpaSimple().add(new ScoreJ(score, System.getProperty("user.name"), "stones"));
 			new GameFinishedService().addRatingAndComments("stones");
 			System.out.println("Best scores: ");
 			new ScoreListing("stones").print();

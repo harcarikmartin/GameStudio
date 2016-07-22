@@ -4,13 +4,13 @@ import java.util.List;
 
 import sk.tsystems.gamestudio.entity.ScoreJ;
 import sk.tsystems.gamestudio.service.jdbc.ScoreJDBC;
-import sk.tsystems.gamestudio.service.jpasimple.ScoreJpa;
+import sk.tsystems.gamestudio.service.jpasimple.ScoreJpaSimple;
 
 public class ScoreListing {
 	private List<ScoreJ> scores;
 	
 	public ScoreListing(String gameName) {
-		scores = new ScoreJpa().findTenBestScoresForGame(gameName);
+		scores = new ScoreJpaSimple().findTenBestScoresForGame(gameName);
 		}
 	
 	public void print() {

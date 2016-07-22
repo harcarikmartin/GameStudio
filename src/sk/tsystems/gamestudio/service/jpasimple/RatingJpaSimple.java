@@ -6,7 +6,7 @@ import sk.testJpa.jpa.JpaHelper;
 import sk.tsystems.gamestudio.entity.RatingJ;
 import sk.tsystems.gamestudio.service.RatingService;
 
-public class RatingJpa implements RatingService{
+public class RatingJpaSimple implements RatingService{
 
 	@Override
 	public void add(RatingJ rating) {

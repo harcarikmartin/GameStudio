@@ -21,6 +21,9 @@ public class Rating {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Game game;
 
+	public Rating() {
+	}
+
 	public Rating(int rating, Player player, Game game) {
 		this.rating = rating;
 		this.player = player;

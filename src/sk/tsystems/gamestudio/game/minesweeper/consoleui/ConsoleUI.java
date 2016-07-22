@@ -17,7 +17,7 @@ import sk.tsystems.gamestudio.game.minesweeper.core.Tile.State;
 import sk.tsystems.gamestudio.service.GameFinishedService;
 import sk.tsystems.gamestudio.service.ScoreListing;
 import sk.tsystems.gamestudio.service.jdbc.ScoreJDBC;
-import sk.tsystems.gamestudio.service.jpasimple.ScoreJpa;
+import sk.tsystems.gamestudio.service.jpasimple.ScoreJpaSimple;
 
 /**
  * Console user interface.
@@ -48,7 +48,7 @@ public class ConsoleUI implements UserInterface {
 			if (field.getState().equals(GameState.SOLVED)) {
 				System.out.println("You WON");
 				int score = (int) Minesweeper.getInstance().getPlayingSeconds();
-				new ScoreJpa().add(new ScoreJ(score, System.getProperty("user.name"), "minesweeper"));
+				new ScoreJpaSimple().add(new ScoreJ(score, System.getProperty("user.name"), "minesweeper"));
 				new GameFinishedService().addRatingAndComments("minesweeper");
 				System.out.println("Best scores: ");
 				new ScoreListing("minesweeper").print();

@@ -6,7 +6,7 @@ import sk.testJpa.jpa.JpaHelper;
 import sk.tsystems.gamestudio.entity.ScoreJ;
 import sk.tsystems.gamestudio.service.ScoreService;
 
-public class ScoreJpa implements ScoreService{
+public class ScoreJpaSimple implements ScoreService{
 
 	@Override
 	public void add(ScoreJ score) {

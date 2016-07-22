@@ -17,21 +17,23 @@ public class RatingJpa {
 	
 	public int findRatingsCountForGame(Game game) {
 		EntityManager em = JpaHelper.getEntityManager();
-		Query query = em.createQuery("Select count(r) from Rating r where r.gameName = :gameName");
-		query.setParameter("gameName", game);
+		Query query = em.createQuery("Select count(r) from Rating r where r.game = :game");
+		query.setParameter("game", game);
 		if(query.getResultList().isEmpty()) {
 			return 0;
 		} else {
-			return 0;
+			return Math.toIntExact((long)query.getResultList().get(0));
 		}
-		//Integer.parseInt( JpaHelper.getEntityManager().createQuery("Select count(r.gameName) from RatingJ r where r.gameName = :gameName").setParameter("gameName", gameName).getSingleResult().toString());
 	}
-
 	
 	public double findAverageRatingForGame(Game game) {
-		return 0;
-//			Object o = JpaHelper.getEntityManager().createQuery("Select avg(cast(r.rating as double)) from RatingJ r where r.gameName = :gamename").setParameter("gamename", gameName).getSingleResult();
-//			Double d = Double.parseDouble(o.toString());
-			
+		EntityManager em = JpaHelper.getEntityManager();
+		Query query = em.createQuery("Select avg(r.rating) from Rating r where r.game = :game");
+		query.setParameter("game", game);
+		if(query.getResultList().isEmpty()) {
+			return 0;
+		} else {
+			return (double) query.getResultList().get(0);
+		}
 	}
 }

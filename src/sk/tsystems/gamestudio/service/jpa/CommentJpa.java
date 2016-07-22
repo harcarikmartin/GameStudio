@@ -1,6 +1,10 @@
 package sk.tsystems.gamestudio.service.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import sk.testJpa.jpa.JpaHelper;
 import sk.tsystems.gamestudio.entity.jpa.Comment;
@@ -15,7 +19,11 @@ public class CommentJpa {
 	}
 	
 	public List<Comment> findCommentsForGame(Game game) {
-		return null; 
-		//JpaHelper.getEntityManager().createQuery("Select c from CommentJ c where c.gameName = :gameName").setParameter("gameName", game).getResultList();
+		List<Comment> comments = new ArrayList<>();
+		EntityManager em = JpaHelper.getEntityManager();
+		Query query = em.createQuery("Select c from Comment c where c.game = :game");
+		query.setParameter("game", game);
+		comments = query.getResultList();
+		return comments;
 	}
 }

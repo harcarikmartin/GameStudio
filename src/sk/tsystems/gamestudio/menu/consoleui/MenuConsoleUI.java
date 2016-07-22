@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import sk.tsystems.gamestudio.entity.jpa.Comment;
 import sk.tsystems.gamestudio.entity.jpa.Game;
 import sk.tsystems.gamestudio.entity.jpa.Player;
+import sk.tsystems.gamestudio.entity.jpa.Rating;
+import sk.tsystems.gamestudio.entity.jpa.Score;
 import sk.tsystems.gamestudio.game.guessthenumber.Gtn;
 import sk.tsystems.gamestudio.game.minesweeper.Minesweeper;
 import sk.tsystems.gamestudio.game.stones.Stones;
@@ -14,7 +16,10 @@ import sk.tsystems.gamestudio.menu.GameI;
 import sk.tsystems.gamestudio.service.jpa.CommentJpa;
 import sk.tsystems.gamestudio.service.jpa.GameJpa;
 import sk.tsystems.gamestudio.service.jpa.PlayerJpa;
-import sk.tsystems.gamestudio.service.jpasimple.RatingJpa;
+import sk.tsystems.gamestudio.service.jpa.RatingJpa;
+import sk.tsystems.gamestudio.service.jpa.ScoreJpa;
+import sk.tsystems.gamestudio.service.jpasimple.RatingJpaSimple;
+
 
 public class MenuConsoleUI implements GameI {
 	private BufferedReader input = new BufferedReader(new InputStreamReader(
@@ -37,16 +42,28 @@ public class MenuConsoleUI implements GameI {
 //		} else {
 //			System.out.println("Game Neni");
 //		}
-		
+		Rating rating = new Rating();
+		rating.setRating(5);
 		Comment comment = new Comment();
 		comment.setComment("commentjpa");
-//		comment.setPlayer(player);
-//		comment.setGame(games);
+		Score score = new Score();
+		score.setScore(2000);
 		Player player = new PlayerJpa().setPresentPlayer(System.getProperty("user.name"));
 		Game gm = new GameJpa().setPresentGame("minesweeper");
 		comment.setPlayer(player);
 		comment.setGame(gm);
+		rating.setPlayer(player);
+		rating.setGame(gm);
+		score.setPlayer(player);
+		score.setGame(gm);
 		new CommentJpa().addComment(comment);
+		new RatingJpa().addRating(rating);
+		new ScoreJpa().addScore(score);
+		System.out.println(new ScoreJpa().findTenBestScoresForGame(gm));
+		System.out.println(new RatingJpa().findRatingsCountForGame(gm));
+		System.out.println(new RatingJpa().findAverageRatingForGame(gm));
+		System.out.println(new CommentJpa().findCommentsForGame(gm));
+		
 		
 		boolean run = true;
 		System.out.println(System.getProperty("user.name") + ", welcome to GameCenter, choose the Game you want to play.");
@@ -91,8 +108,8 @@ public class MenuConsoleUI implements GameI {
 			} else {
 //				System.out.println("Game: " + option.toString().toLowerCase());
 				System.out.printf("%2d. %-20s %-15d %-15f%n", option.ordinal() + 1, option, 
-						new RatingJpa().findRatingsCountForGame(option.toString().toLowerCase()), 
-						new RatingJpa().findAverageRatingForGame(option.toString().toLowerCase()));
+						new RatingJpaSimple().findRatingsCountForGame(option.toString().toLowerCase()), 
+						new RatingJpaSimple().findAverageRatingForGame(option.toString().toLowerCase()));
 			}
 		}
 		System.out.println("---------------------------------------------------");

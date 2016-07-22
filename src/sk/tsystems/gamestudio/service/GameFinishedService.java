@@ -6,8 +6,8 @@ import java.util.Scanner;
 import sk.tsystems.gamestudio.entity.CommentJ;
 import sk.tsystems.gamestudio.entity.RatingJ;
 import sk.tsystems.gamestudio.service.jdbc.CommentJDBC;
-import sk.tsystems.gamestudio.service.jpasimple.CommentJpa;
-import sk.tsystems.gamestudio.service.jpasimple.RatingJpa;
+import sk.tsystems.gamestudio.service.jpasimple.CommentJpaSimple;
+import sk.tsystems.gamestudio.service.jpasimple.RatingJpaSimple;
 
 public class GameFinishedService {
 	private Scanner scanner = new Scanner(System.in);
@@ -29,7 +29,7 @@ public class GameFinishedService {
 				case "3":
 				case "4":
 				case "5":
-					new RatingJpa().add(new RatingJ(Integer.parseInt(line), System.getProperty("user.name"), gameName));
+					new RatingJpaSimple().add(new RatingJ(Integer.parseInt(line), System.getProperty("user.name"), gameName));
 					added = true;
 					break;
 				default:
@@ -47,7 +47,7 @@ public class GameFinishedService {
 			System.out.println("Add your comment: ");
 			line = scanner.nextLine().trim();
 			
-			new CommentJpa().add(new CommentJ(line, System.getProperty("user.name"), gameName));
+			new CommentJpaSimple().add(new CommentJ(line, System.getProperty("user.name"), gameName));
 			System.out.println("Comment added.");
 			break;
 		default:
@@ -55,7 +55,7 @@ public class GameFinishedService {
 			line = scanner.nextLine().toLowerCase().trim();
 				if(line.equals("y")) {
 					System.out.println("Listing comments..");
-					List<CommentJ> list = new CommentJpa().findCommentsForGame(gameName);
+					List<CommentJ> list = new CommentJpaSimple().findCommentsForGame(gameName);
 					if(list.size() != 0) {
 						for(CommentJ comment : list) {
 							System.out.println("-> " + comment.getComment());

@@ -6,7 +6,7 @@ import sk.testJpa.jpa.JpaHelper;
 import sk.tsystems.gamestudio.entity.CommentJ;
 import sk.tsystems.gamestudio.service.CommentService;
 
-public class CommentJpa implements CommentService {
+public class CommentJpaSimple implements CommentService {
 
 	@Override
 	public void add(CommentJ comment) {
